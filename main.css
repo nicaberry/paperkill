@@ -1,0 +1,28 @@
+.wrap {
+    width: 300px;
+    margin: 10px 20px;
+    padding: 10px;
+    display: inline-block;
+    /* border: 1px solid black; */
+    vertical-align: top;
+    position: relative;
+}
+
+.wrap h1,
+.wrap h2 {
+    text-align: center;
+}
+
+.wrap img {
+    display: block;
+    margin: 0 auto;
+    padding-bottom: 25px;
+}
+
+.wrap div {
+    margin: 15px;
+}
+
+a {
+    cursor: pointer;
+}
