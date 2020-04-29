@@ -1,85 +1,90 @@
 "use strict";
+import {BookClient} from "./client/BookClient"
 const ROOT = "https://paperkill.nicaberry.com";
-const API_BOOK_LIST = ROOT + "/api/v1/book-list";
-const API_BOOK = ROOT + "/api/v1/book/";
-const API_BOOK_AUTHOR = ROOT + "/api/v1/author/";
+const API_BOOK_LIST = "/api/v1/book-list";
+const API_BOOK = "/api/v1/book/";
+const API_BOOK_AUTHOR =  "/api/v1/author/";
 const bookList = document.querySelector("#bookList");
 
-let promise = fetch(API_BOOK_LIST)
-    .then(response => {
-        console.log(response);
-        return response.json();
-    })
-    .then(json => {
-        json.items.forEach(item => {
+const client = new BookClient(ROOT);
+
+
+let promise = client.getBookListPromise()
+    .then(bookListModel => {
+        bookListModel.items.forEach(item => {
             let linkBook = document.createElement("a");
-            linkBook.href = API_BOOK + item.id;
+            linkBook.href = ROOT + API_BOOK + item.id;
             linkBook.onclick = e => {
                 e.preventDefault();
-                history.pushState({}, item.title, item.id);
-                let promise = fetch(API_BOOK + item.id)
-                    .then(response => response.json())
-                    .then(json => {
-                        console.log(json)
-                        let linkAuthor = document.createElement("a");
-                        linkAuthor.href = API_BOOK_AUTHOR + json.authors[0].id;
-                        linkAuthor.onclick = e => {
-                            e.preventDefault();
-                            let promise = fetch(API_BOOK_AUTHOR + json.authors[0].id)
-                                .then(response => response.json())
-                                .then(json => {
-                                    let wrap = document.createElement("div");
-                                    wrap.classList.add("wrap");
-        
-                                    let author = document.createElement("h1");
-                                    let bornDied = document.createElement("h3");
-                                    let img = document.createElement("img");
-                                    let description = document.createElement("div");
-                                    let booksWrap = document.createElement("div");
-        
-                                    author.innerHTML = json.name;
-                                    console.log(json);
-                                    bornDied.innerHTML = json.years.born + " - " + json.years.died;
-                                    img.src = ROOT + json.picture.url;
-                                    description.innerHTML = json.description;
-                                    (json.books).forEach( item => {
-                                        let bookTitle = document.createElement("div");
-                                        let img = document.createElement("img");
-                                        
-                                        bookTitle.innerHTML = item.title;
-                                        img.src = ROOT + item.thumbnail;
-
-                                        booksWrap.append(img);
-                                        booksWrap.append(bookTitle);
-                                    })
-        
-                                    wrap.append(author);
-                                    wrap.append(bornDied);
-                                    wrap.append(img);
-                                    wrap.append(description);
-                                    wrap.append(booksWrap);
-        
-                                    bookList.innerHTML = "";
-                                    bookList.append(wrap);
-                                })
-                        }
-
+                // history.pushState({}, item.title, item.id);
+                let promise = client.getBookPromise(item.id)
+                    .then(bookModel => {
                         let wrap = document.createElement("div");
                         wrap.classList.add("wrap");
+                        bookModel.authors.forEach(author => {
+                            let linkAuthor = document.createElement("a");
+                            linkAuthor.href = API_BOOK_AUTHOR + author.id; 
+                            linkAuthor.onclick = e => {
+                                e.preventDefault();
+                                let promise = client.getAuthorPromise(author.id)
+                                    .then(authorModel => {
+                                        let wrap = document.createElement("div");
+                                        wrap.classList.add("wrap");
+            
+                                        let author = document.createElement("h1");
+                                        let bornDied = document.createElement("h3");
+                                        let img = document.createElement("img");
+                                        let description = document.createElement("div");
+                                        let booksWrap = document.createElement("div");
+            
+                                        author.innerHTML = authorModel.name;
+                                        bornDied.innerHTML = authorModel.years.born + " - " + authorModel.years.died;
+                                        img.src = ROOT + authorModel.picture.url;
+                                        description.innerHTML = authorModel.description;
+                                        (authorModel.books).forEach( item => {
+                                            let linkBook = document.createElement("a");
+                                            linkBook.href = ROOT + API_BOOK + item.id;
 
-                        let author = document.createElement("h2");
+                                            linkBook.onclick = e => {
+                                                e.preventDefault();
+                                                
+                                            }
+                                            let bookTitle = document.createElement("div");
+                                            let img = document.createElement("img");
+                                            
+                                            bookTitle.innerHTML = item.title;
+                                            img.src = ROOT + item.thumbnail;
+                                            
+                                            linkBook.append(img);
+                                            booksWrap.append(linkBook);
+                                            booksWrap.append(bookTitle);
+                                        })
+            
+                                        wrap.append(author);
+                                        wrap.append(bornDied);
+                                        wrap.append(img);
+                                        wrap.append(description);
+                                        wrap.append(booksWrap);
+            
+                                        bookList.innerHTML = "";
+                                        bookList.append(wrap);
+                                    })
+                            }
+    
+                            let authorName = document.createElement("h2");
+                            authorName.innerHTML = author.name;
+                            linkAuthor.append(authorName);
+                            wrap.append(linkAuthor);
+                        })
+
                         let title = document.createElement("h1");
                         let img = document.createElement("img");
                         let description = document.createElement("div");
 
-                        author.innerHTML = json.authors[0].name;
-                        title.innerHTML = json.title;
-                        img.src = ROOT + json.cover.url;
-                        description.innerHTML = json.description;
+                        title.innerHTML = bookModel.title;
+                        img.src = ROOT + bookModel.url;
+                        description.innerHTML = bookModel.description;
 
-                        linkAuthor.append(author);
-
-                        wrap.append(linkAuthor);
                         wrap.append(title);
                         wrap.append(img);
                         wrap.append(description);
@@ -99,7 +104,7 @@ let promise = fetch(API_BOOK_LIST)
 
             author.innerHTML = item.authorLine;
             title.innerHTML = item.title;
-            img.src = ROOT + item.cover.thumbnail;
+            img.src = ROOT + item.thumbnail;
             description.innerHTML = item.description;
 
             linkBook.append(img);
