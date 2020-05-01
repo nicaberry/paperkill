@@ -33,7 +33,9 @@ export class BookListView {
             linkBook.id = item.id;
             linkBook.onclick = e => {
                 e.preventDefault();
-                this.controler.getBookPage(item.id);
+                
+                let myEvent = new CustomEvent("navigate", {"detail": {"type": "book", "id": item.id}});
+                document.dispatchEvent(myEvent);
             }
 
             linkBook.append(img);

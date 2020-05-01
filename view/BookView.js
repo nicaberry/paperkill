@@ -20,7 +20,9 @@ export class BookView {
             linkAuthor.id = author.id;
             linkAuthor.onclick = e => {
                 e.preventDefault();
-                this.controler.getAuthorPage(author.id);
+
+                let myEvent = new CustomEvent("navigate", {"detail": {"type": "author", "id": author.id}});
+                document.dispatchEvent(myEvent);
             } 
 
             let authorName = document.createElement("h2");

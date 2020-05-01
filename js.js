@@ -44,4 +44,11 @@ class Controler {
 let controler = new Controler(client, ROOT, content);
 controler.getBookListPage();
 
-
+document.addEventListener("navigate", e => {
+    if (e.detail.type === "book") {
+        controler.getBookPage(e.detail.id);
+    }
+    if (e.detail.type === "author") {
+        controler.getAuthorPage(e.detail.id);
+    }
+})
