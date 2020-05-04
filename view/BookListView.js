@@ -11,8 +11,17 @@ export class BookListView {
      * 
      * @param {BookListModel} model 
      */
-    render(model, content) {
+    render(model, main, content) {
         let elementHTML = document.createElement("div");
+
+        let linkMain = document.createElement("button");
+        linkMain.innerHTML = "Главная страница";
+        linkMain.onclick = e => {
+            e.preventDefault();
+            let myEvent = new CustomEvent("navigate", {"detail": {"type": "main", "id": ""}});
+            document.dispatchEvent(myEvent);
+        }
+
         model.items.forEach(item => {
             let wrap = document.createElement("div");
             wrap.classList.add("wrap");
@@ -46,6 +55,10 @@ export class BookListView {
 
             elementHTML.append(wrap);
         })
+        main.innerHTML = "";
+        main.append(linkMain);
+
+        content.innerHTML = "";
         content.append(elementHTML);
     }
 }
