@@ -38,7 +38,9 @@ export class Controler {
     getBookListPage() {
         this.client.getBookListPromise()
             .then(bookListModel => {
-                new BookListView(this.ROOT, this).render(bookListModel, this.main, this.content);
+                let bookListView = new BookListView(this.ROOT, this);
+                bookListView.render(bookListModel, this.content);
+                bookListView.renderMain(this.main);
             })
     }
 
@@ -46,6 +48,7 @@ export class Controler {
         this.client.getBookPromise(id)
             .then(bookModel => {
                 new BookView(this.ROOT, this).render(bookModel, this.content);
+                new BookListView(this.ROOT, this).renderMain(this.main);
             })
     }
 
@@ -53,6 +56,7 @@ export class Controler {
         this.client.getAuthorPromise(id)
             .then(authorModel => {
                 new AuthorView(this.ROOT, this).render(authorModel, this.content);
+                new BookListView(this.ROOT, this).renderMain(this.main);
             })
     }
 }
