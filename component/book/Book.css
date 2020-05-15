@@ -1,0 +1,21 @@
+.book {
+    width: 500px;
+    margin: 0 auto;
+}
+
+.book__author {
+   font-stretch: narrower; 
+}
+
+.book__title {
+    font-size: 48px;
+}
+
+.book__img {
+    width: 200px;
+}
+
+.book__description {
+    width: 300px;
+    padding:20px;
+}

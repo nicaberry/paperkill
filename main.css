@@ -1,28 +1,17 @@
-.wrap {
-    width: 300px;
-    margin: 10px 20px;
-    padding: 10px;
-    display: inline-block;
-    /* border: 1px solid black; */
-    vertical-align: top;
-    position: relative;
-}
+ @import "/reset.css";
+ @import "./component/card/Card.css";
+ @import "./component/book/Book.css";
+ @import "./component/author/Author.css";
 
-.wrap h1,
-.wrap h2 {
-    text-align: center;
-}
+ * {
+     box-sizing: border-box;
+ }
 
-.wrap img {
-    display: block;
-    margin: 0 auto;
-    padding-bottom: 25px;
-}
+ body {
+     background-color: blueviolet;
+ }
 
-.wrap div {
-    margin: 15px;
-}
-
-a {
+ button, 
+ a {
     cursor: pointer;
-}
+ }

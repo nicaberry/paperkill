@@ -1,0 +1,20 @@
+.card {
+    width: 300px;
+    margin: 30px;
+    display: inline-block;
+    vertical-align: top;
+    background-color: beige;
+}
+
+.card__author {
+}
+
+.card__title {
+}
+
+.card__img {
+    box-shadow: blueviolet;
+}
+
+.card__description {
+}

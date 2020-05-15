@@ -6,9 +6,6 @@ import {BookListView} from "./view/BookListView";
 import {Router} from "./router";
 
 const ROOT = "https://paperkill.nicaberry.com";
-const API_BOOK_LIST = "/api/v1/book-list";
-const API_BOOK = "/api/v1/book/";
-const API_BOOK_AUTHOR =  "/api/v1/author/";
 const content = document.querySelector("#content");
 const main = document.querySelector("#main");
 

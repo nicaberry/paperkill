@@ -1,0 +1,28 @@
+.author {
+    width: 500px;
+    margin: 0 auto;
+}
+
+.author__name {
+    font-size: larger;
+}
+
+.author__img {
+    width: 300px;
+}
+
+.author__description {
+    width: 300px;
+}
+
+.author__booksAuthor {
+    background-color: beige;
+}
+
+.author__imgBook {
+    box-shadow: 1px 2px 3px black;
+}
+
+.author__bookTitle {
+    font-size: x-small;
+}

@@ -1,6 +1,7 @@
 "use strict";
 
 import {BookModel} from "../model/BookModel";
+import {Book} from "../component/book/Book";
 
 export class BookView {
     constructor(urlROOT, controler) {
@@ -12,40 +13,7 @@ export class BookView {
      * @param {BookModel} model 
      */
     render(model, content) {
-        let wrap = document.createElement("div");
-        wrap.classList.add("wrap");
-
-        model.authors.forEach(author => {
-            let linkAuthor = document.createElement("a");
-            linkAuthor.id = author.id;
-            linkAuthor.onclick = e => {
-                e.preventDefault();
-
-                let myEvent = new CustomEvent("navigate", {"detail": {"type": "author", "id": author.id}});
-                document.dispatchEvent(myEvent);
-            } 
-
-            let authorName = document.createElement("h2");
-            authorName.innerHTML = author.name;
-
-            linkAuthor.append(authorName);
-            wrap.append(linkAuthor);
-        })
-
-        let title = document.createElement("h1");
-        title.innerHTML = model.title;
-
-        let img = document.createElement("img");
-        img.src = this.ROOT + model.url;
-
-        let description = document.createElement("div");
-        description.innerHTML = model.description;
-
-        wrap.append(title);
-        wrap.append(img);
-        wrap.append(description);
-
         content.innerHTML = "";
-        content.append(wrap);
+        content.append(Book(this.ROOT, model));
     }
 }
