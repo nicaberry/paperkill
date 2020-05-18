@@ -1,21 +1,28 @@
 .book {
-    width: 500px;
+    width: 80%;
     margin: 0 auto;
+    padding: 40px;
+    vertical-align: top;
+    text-align: center;
+    background-color: rgba(231, 165, 233, 0.5);
 }
 
-.book__author {
-   font-stretch: narrower; 
+.book__authorName {
+    font-size: 48px;
+    margin-bottom: 20px;
 }
 
 .book__title {
-    font-size: 48px;
+    font-size: 36px;
+    margin-bottom: 30px;
 }
 
 .book__img {
-    width: 200px;
+    box-shadow: 1px 2px 3px rgb(46, 16, 73);
+    margin-bottom: 20px;
 }
 
 .book__description {
-    width: 300px;
-    padding:20px;
+    text-align: left;
+    font-size: 24px;
 }

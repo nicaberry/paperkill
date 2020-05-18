@@ -1,20 +1,28 @@
 .card {
-    width: 300px;
+    width: 500px;
     margin: 30px;
+    padding: 20px;
     display: inline-block;
     vertical-align: top;
-    background-color: beige;
+    text-align: center;
+    background-color: rgba(231, 165, 233, 0.5);
 }
 
 .card__author {
+    font-size: 28px;
+    margin-bottom: 10px;
 }
 
 .card__title {
+    font-size: 36px;
+    margin-bottom: 20px;
 }
 
 .card__img {
-    box-shadow: blueviolet;
+    box-shadow: 1px 2px 3px rgb(46, 16, 73);
+    margin-bottom: 20px;
 }
 
 .card__description {
+    text-align: left;
 }

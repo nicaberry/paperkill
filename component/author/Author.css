@@ -1,28 +1,42 @@
 .author {
-    width: 500px;
+    width: 80%;
     margin: 0 auto;
+    padding: 40px;
+    vertical-align: top;
+    text-align: center;
+    background-color: rgba(231, 165, 233, 0.5);
 }
 
 .author__name {
-    font-size: larger;
+    font-size: 48px;
+    margin-bottom: 40px;
+}
+
+.author__bornDied {
+    margin-bottom: 40px;
 }
 
 .author__img {
-    width: 300px;
+    box-shadow: 1px 2px 3px rgb(46, 16, 73);
+    margin-bottom: 40px;
 }
 
 .author__description {
-    width: 300px;
+    text-align: left;
+    font-size: 24px;
+    margin-bottom: 40px;
 }
 
 .author__booksAuthor {
-    background-color: beige;
+    padding: 40px;
+    background-color: rgba(46, 16, 73, 0.5);
 }
 
 .author__imgBook {
     box-shadow: 1px 2px 3px black;
+    margin-bottom: 20px;
 }
 
 .author__bookTitle {
-    font-size: x-small;
+    font-size: 18px;
 }
